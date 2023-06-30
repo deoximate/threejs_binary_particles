@@ -1,2 +1,2 @@
 # threejs particles
-threejs particles
+ThreeJS / 3JS particles 
