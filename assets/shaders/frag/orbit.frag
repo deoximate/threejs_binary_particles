@@ -1,3 +1,4 @@
+
 #define PI 3.14159265359
 #define PI2 6.28318530718
 
@@ -8,6 +9,10 @@ uniform float uTime;
 uniform vec2 uResolution;
 uniform vec3 uViewPos;
 
+
+in float vInstanceID;
+in vec3 vNormal;
+in vec3 vPos;
 
 
 vec3 color = vec3(0.0);
@@ -37,17 +42,17 @@ void main() {
 
   vec2 tMaskSize = vec2(textureSize(tMask, 0));
 
-  vec2 uv = gl_FragCoord.xy / tMaskSize.xy;
-
-
-      float r = rand(vec2(floor((uv.x*27.0*2.0)), 0.0))*0.2+0.1;
-      float offsetY = uTime*r;
-      float v = texture(tMask, uv*2.0+vec2(0.0, offsetY)).r;
-      color = vec3(0.0);
-
-      color = vec3(v);
+  vec2 uv = gl_PointCoord.xy / 27.0 / vec2(3.0, 2.0);
 
 
 
-  gl_FragColor = vec4(color, 0.1);
+
+  float v = 1.0-texture(tMask, uv*2.0).r;
+
+  color = vec3(31.0, 24.0, 192.0) / 255.0;
+
+
+
+
+  gl_FragColor = vec4(color, v);
 }
